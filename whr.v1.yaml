@@ -8,6 +8,8 @@ servers:
   - description: ''
     url: 'https://dev.welcomehr.jp/api/v3'
 tags:
+  - name: setting
+    description: setting
   - name: flow_template
     description: flow template
   - name: flow_step
@@ -21,25 +23,54 @@ tags:
   - name: user
     description: user
   - name: info field
-    description: info field
+    description: info field in offer form
   - name: token
     description: invite token
   - name: member
     description: member
   - name: csv_sample
-    description: member'csv data import sample
+    description: "member'csv data import sample"
+  - name: csv
+    description: member csv file
   - name: common
     description: common api
   - name: me
     description: current user
   - name: document template
     description: document template
-
+  - name: offer approver
+    description: admin who approve new hires flow step
+  - name: offer step
+    description: "new hire's offer flow step"
+  - name: info group
+    description: info group
+  - name: user field
+    description: user field on offer
+  - name: member field
+    description: member field on offer
+  - name: info form
+    description: info form
+  - name: info form trigger
+    description: alert trigger in info form
+  - name: alert trigger
+    description: alert trigger
+  - name: user info
+    description: user info
+  - name: document
+    description: document
+  - name: auth
+    description: user authentication
+  - name: documment
+    description: document
+  - name: plan
+    description: payment plan
+  - name: offer formm
+    description: offer form
 paths:
   /settings/alerts:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - setting
       responses:
         '200':
           description: OK
@@ -60,6 +91,8 @@ paths:
       operationId: get-settings-alerts
       description: Get company alerts
     put:
+      tags:
+        - setting
       summary: ''
       operationId: put-settings-alerts
       responses:
@@ -75,7 +108,6 @@ paths:
                 $ref: '#/components/schemas/SettingAlert'
   /workspaces:
     get:
-      summary: Your GET endpoint
       tags:
         - workspace
       responses:
@@ -271,8 +303,8 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - workspace
       responses:
         '200':
           description: OK
@@ -360,6 +392,8 @@ paths:
             - info: include workpaces info
             - childern: incluse workspace children
     put:
+      tags:
+        - workspace
       summary: ''
       operationId: put-workspaces-workspace_id
       responses:
@@ -425,6 +459,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Workspace'
     delete:
+      tags:
+        - workspace
       summary: ''
       operationId: delete-workspaces-workspace_id
       responses:
@@ -460,8 +496,8 @@ paths:
                     message: Could not get company meta
   /flow_templates:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - flow_template
       responses:
         '200':
           description: OK
@@ -552,6 +588,8 @@ paths:
           name: order
           description: order
     post:
+      tags:
+        - flow_template
       summary: ''
       operationId: post-flow_templates
       responses:
@@ -728,6 +766,8 @@ paths:
                             - user_id: PYBxzeKqJd1p
   /offers:
     post:
+      tags:
+        - offer
       summary: ''
       operationId: post-offers
       responses:
@@ -770,7 +810,6 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
       tags:
         - flow_templates
       responses:
@@ -931,6 +970,8 @@ paths:
         in: path
         required: true
     put:
+      tags:
+        - offer approver
       summary: ''
       operationId: put-offer_flow_approvers-approver_id
       responses:
@@ -1004,8 +1045,8 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - offer step
       responses:
         '200':
           description: OK
@@ -1189,6 +1230,8 @@ paths:
       operationId: get-offer_flows-offer_id-stage-index
       description: "Get data for detail Flow_step scene (from email's links)"
     put:
+      tags:
+        - offer step
       summary: ''
       operationId: put-offer_flows-offer_id-stage-index
       responses:
@@ -1386,6 +1429,8 @@ paths:
         in: path
         required: true
     patch:
+      tags:
+        - offer
       summary: ''
       operationId: patch-offers-offer_id
       responses:
@@ -1468,6 +1513,8 @@ paths:
                 value:
                   flow_template_id: LGdNZRbZO87w
     get:
+      tags:
+        - offer
       summary: ''
       operationId: get-offers-offer_id
       responses:
@@ -1701,6 +1748,8 @@ paths:
                     flow_template_name: test_flow_status_level_2
   /admins:
     post:
+      tags:
+        - admin
       summary: ''
       operationId: post-admins
       responses:
@@ -1748,6 +1797,8 @@ paths:
                   role: admin
                   company_id: Vet769Ef
     get:
+      tags:
+        - admin
       summary: ''
       operationId: get-admins
       responses:
@@ -1823,6 +1874,8 @@ paths:
           name: order
           description: order by
     delete:
+      tags:
+        - admin
       summary: ''
       operationId: delete-admins
       responses:
@@ -1872,7 +1925,9 @@ paths:
         in: path
         required: true
     patch:
-      summary: ''
+      tags:
+        - admin
+      summary: admin update new hire role
       operationId: patch-admins-user_id
       responses:
         '200':
@@ -1915,7 +1970,9 @@ paths:
                 value:
                   role: super_admin
     delete:
-      summary: ''
+      tags:
+        - admin
+      summary: admin delete new hire
       operationId: delete-admins-user_id
       responses:
         '200':
@@ -1940,7 +1997,9 @@ paths:
         in: path
         required: true
     patch:
-      summary: ''
+      tags:
+        - admin
+      summary: admin update password for new hire
       operationId: patch-admin-user_id-password
       responses:
         '200':
@@ -1979,8 +2038,9 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: Get info from invite token
+      tags:
+        - token
       responses:
         '200':
           description: OK
@@ -2043,7 +2103,9 @@ paths:
         in: path
         required: true
     put:
-      summary: ''
+      tags:
+        - offer status
+      summary: new hire update offer flow step status
       operationId: put-offers-offer_id-steps-step_id-status
       responses:
         '200':
@@ -2167,6 +2229,8 @@ paths:
         description: ''
   /info_groups:
     post:
+      tags:
+        - info group
       summary: ''
       operationId: post-info_groups
       responses:
@@ -2230,6 +2294,8 @@ paths:
         in: path
         required: true
     put:
+      tags:
+        - info group
       summary: ''
       operationId: put-info_groups-group_ids
       responses:
@@ -2290,8 +2356,8 @@ paths:
                   key: test_key
   /info_fields:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - info field
       responses:
         '200':
           description: OK
@@ -2336,6 +2402,8 @@ paths:
           description: |
             excluded ID
     post:
+      tags:
+        - info field
       summary: ''
       operationId: post-info_fields
       responses:
@@ -2401,6 +2469,8 @@ paths:
         in: path
         required: true
     put:
+      tags:
+        - info field
       summary: ''
       operationId: put-info_fields-field_id
       responses:
@@ -2463,6 +2533,8 @@ paths:
         in: path
         required: true
     put:
+      tags:
+        - user field
       summary: ''
       operationId: put-users-user_id-fields-field_id
       responses:
@@ -2526,7 +2598,7 @@ paths:
                     code: api.error_is_not_admin
                     message: You are not an admin
         '500':
-          description: 'internal server error'
+          description: internal server error
           content:
             application/json:
               schema:
@@ -2563,6 +2635,8 @@ paths:
         in: path
         required: true
     put:
+      tags:
+        - member field
       summary: ''
       operationId: put-members-member_id-fields-field_id
       responses:
@@ -2632,8 +2706,8 @@ paths:
                   value: updated
   /info_forms:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - info form
       responses:
         '200':
           description: OK
@@ -2720,6 +2794,8 @@ paths:
           in: query
           name: order
     post:
+      tags:
+        - info form
       summary: ''
       operationId: post-info_forms
       responses:
@@ -2799,8 +2875,8 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - info form
       responses:
         '200':
           description: OK
@@ -2869,6 +2945,8 @@ paths:
                     message: system error
       operationId: get-info_forms-form_id
     put:
+      tags:
+        - info form
       summary: ''
       operationId: put-info_forms-form_id
       responses:
@@ -2946,6 +3024,8 @@ paths:
                 value:
                   name: updated
     delete:
+      tags:
+        - info form
       summary: ''
       operationId: delete-info_forms-form_id
       responses:
@@ -2987,6 +3067,8 @@ paths:
         in: path
         required: true
     post:
+      tags:
+        - info form trigger
       summary: ''
       operationId: post-info_forms-form_id-alert_triggers
       responses:
@@ -3040,6 +3122,8 @@ paths:
                   field_id: 93qWkpVQ0Mva
         description: ''
     delete:
+      tags:
+        - info form trigger
       summary: ''
       operationId: delete-info_forms-form_id-alert_triggers
       responses:
@@ -3071,6 +3155,8 @@ paths:
                     message: system error
   /alert_triggers:
     post:
+      tags:
+        - alert trigger
       summary: ''
       operationId: post-alert_triggers
       responses:
@@ -3126,8 +3212,8 @@ paths:
         description: ''
   /info_data:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - user info
       responses:
         '200':
           description: OK
@@ -3145,8 +3231,9 @@ paths:
       operationId: get-info_data
   /info_data/countries:
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: Get user info countries
+      tags:
+        - user info
       responses:
         '200':
           description: OK
@@ -3167,6 +3254,8 @@ paths:
         in: path
         required: true
     delete:
+      tags:
+        - alert trigger
       summary: ''
       operationId: delete-alert_triggers-alert_id
       responses:
@@ -3198,8 +3287,8 @@ paths:
                     message: system error
   /offer_flow_approvers:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - offer approver
       responses:
         '200':
           description: OK
@@ -3296,8 +3385,9 @@ paths:
           name: per_page
   /offer_flow_approvers/count:
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: count offer flow approver
+      tags:
+        - offer approver
       responses:
         '200':
           description: OK
@@ -3331,6 +3421,8 @@ paths:
         in: path
         required: true
     get:
+      tags:
+        - document
       summary: ''
       operationId: get-documents-document_id
       responses:
@@ -3439,6 +3531,8 @@ paths:
                     contract_template: '<table> <tr> <td> <table class="table-contract"> <tr> <td>開始日</td><td>{{.start_date}}</td></tr><tr> <td>終了日</td><td>{{.end_date}}</td></tr><tr> <td>基本給与</td><td>{{.salary_type}}</td></tr><tr> <td>給与額</td><td>{{.salary_amount}}</div></td></tr><tr> <td>社員番号</td><td>{{.employee_number}}</div></td></tr><tr> <td>所属事業所</td><td>{{.workplace}}</div></td></tr><tr> <td>雇用形態</td><td>{{.employee_type}}</div></td></tr><tr> <td>部署1 部署名</td><td>{{.department}}</div></td></tr><tr> <td>契約目安時間</td><td>{{.work_hour}}</div></td></tr><tr> <td>雇用形態（社員区分）</td><td>{{.employee_type_internal}}</div></td></tr><tr> <td>超過勤務手当</td><td>{{.overtime_pay}}</div></td></tr><tr> <td>固定残業時間数</td><td>{{.fixed_overtime_hour}}</div></td></tr></table> </td></tr></table>'
                     need_sign: true
     patch:
+      tags:
+        - document
       summary: ''
       operationId: patch-documents-document_id
       responses:
@@ -3602,6 +3696,8 @@ paths:
                     work_hour: {}
                     workplace: {}
     delete:
+      tags:
+        - document
       summary: ''
       operationId: delete-documents-document_id
       responses:
@@ -3621,6 +3717,8 @@ paths:
                     message: error input
   /login:
     post:
+      tags:
+        - auth
       summary: ''
       operationId: post-login
       responses:
@@ -3699,6 +3797,8 @@ paths:
         description: ''
   /logout:
     post:
+      tags:
+        - auth
       summary: ''
       operationId: post-logout
       responses:
@@ -3734,6 +3834,8 @@ paths:
                     message: Could not update session
   /signup:
     post:
+      tags:
+        - auth
       summary: ''
       operationId: post-signup
       responses:
@@ -3794,6 +3896,8 @@ paths:
                   referal_code: 100-000
   /reset_password:
     post:
+      tags:
+        - auth
       summary: ''
       operationId: post-reset_password
       responses:
@@ -3847,6 +3951,8 @@ paths:
                   email: company@email.com
   /login_google:
     post:
+      tags:
+        - auth
       summary: ''
       operationId: post-login_google
       responses:
@@ -3913,8 +4019,9 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - setting
+      summary: get setting data by key
       responses:
         '200':
           description: OK
@@ -3965,6 +4072,8 @@ paths:
                     message: Could not get company meta
       operationId: get-settings-key
     put:
+      tags:
+        - setting
       summary: ''
       operationId: put-settings-key
       responses:
@@ -4057,7 +4166,6 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
       tags:
         - document_template
       responses:
@@ -4401,22 +4509,23 @@ paths:
                   value:
                     code: api.system
                     message: system error
-  '/document_templates/{template_id/preview}':
+  '/document_templates/{template_id}/preview':
     parameters:
       - schema:
           type: string
-        name: template_id/preview
+        name: template_id
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: get file preview on document template
+      tags:
+        - document template
       responses: {}
       operationId: get-document_templates-template_id-preview
   /document_templates:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - document template
       responses:
         '200':
           description: OK
@@ -4545,7 +4654,9 @@ paths:
         in: path
         required: true
     post:
-      summary: ''
+      tags:
+        - document
+      summary: get preview on document
       operationId: post-documents-document_id-preview
       responses:
         '200':
@@ -4597,8 +4708,8 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - offer step
       responses:
         '200':
           description: OK
@@ -4735,8 +4846,8 @@ paths:
       operationId: get-offers-offer_id-steps
   /members:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - member
       responses:
         '200':
           description: OK
@@ -5285,6 +5396,8 @@ paths:
           name: order
       description: ''
     patch:
+      tags:
+        - member
       summary: ''
       operationId: patch-members
       responses:
@@ -5328,6 +5441,8 @@ paths:
                     - kW6NBAJmDdZY
       description: ''
     delete:
+      tags:
+        - member
       summary: ''
       operationId: delete-members
       responses:
@@ -5381,8 +5496,8 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - member
       responses:
         '200':
           description: OK
@@ -5493,6 +5608,8 @@ paths:
                     deleted_at: null
       operationId: get-members-member_id
     delete:
+      tags:
+        - member
       summary: ''
       operationId: delete-members-member_id
       responses:
@@ -5516,8 +5633,9 @@ paths:
                     message: Could not get job offer
   /members_profiles:
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: get member profile
+      tags:
+        - member
       responses:
         '200':
           description: OK
@@ -5577,6 +5695,8 @@ paths:
           description: '"motify","smarthr","freee","bugyo"'
   /members/csv:
     post:
+      tags:
+        - csv
       summary: ''
       operationId: post-members-csv
       responses:
@@ -5610,7 +5730,6 @@ paths:
           name: action
   /members/csv_sample:
     get:
-      summary: Your GET endpoint
       tags:
         - csv sample
       responses:
@@ -5638,14 +5757,14 @@ paths:
           description: '"utf8","utf16","shiftjis"'
   /plans:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - plan
       responses: {}
       operationId: get-plans
   /me:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - me
       responses:
         '200':
           description: OK
@@ -5714,6 +5833,8 @@ paths:
       operationId: get-me
   /users/password:
     patch:
+      tags:
+        - user
       summary: ''
       operationId: patch-users-password
       responses:
@@ -5757,7 +5878,7 @@ paths:
                   new_password_2: new password
   /me/mfa:
     get:
-      summary: Your GET endpoint
+      summary: generate mfa secret code
       tags:
         - me
       responses:
@@ -5859,7 +5980,6 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
       tags:
         - user
       responses:
@@ -5960,7 +6080,6 @@ paths:
                   last_name: Admin2
   /users:
     get:
-      summary: Your GET endpoint
       tags:
         - user
       responses:
@@ -6043,8 +6162,9 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: get info form in job offer
+      tags:
+        - offer form
       responses:
         '200':
           description: OK
@@ -6466,7 +6586,7 @@ paths:
       operationId: get-offers-offer_id-form
   /echo:
     get:
-      summary: Your GET endpoint
+      summary: ping to server
       tags:
         - common
       responses:
@@ -6475,8 +6595,8 @@ paths:
       operationId: get-echo
   /versions:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - common
       responses:
         '200':
           description: OK
@@ -6496,7 +6616,6 @@ paths:
       operationId: get-versions
   /languages:
     get:
-      summary: Your GET endpoint
       tags:
         - common
       responses:
@@ -6519,8 +6638,8 @@ paths:
       operationId: get-languages
   /timezones:
     get:
-      summary: Your GET endpoint
-      tags: []
+      tags:
+        - common
       responses:
         '200':
           description: OK
@@ -7130,7 +7249,6 @@ paths:
       operationId: get-timezones
   /geo-info:
     get:
-      summary: Your GET endpoint
       tags:
         - commmon
       responses:
@@ -7168,7 +7286,6 @@ paths:
             your public ip
   /zipcode-jp:
     get:
-      summary: Your GET endpoint
       tags:
         - common
       responses:
@@ -7235,8 +7352,9 @@ paths:
       description: 'upload file with Content-Type: multipart/form-data'
   /upload/base64:
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: upload file by base64
+      tags:
+        - common
       responses:
         '200':
           description: OK
@@ -7281,8 +7399,9 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: get signature image
+      tags:
+        - common
       responses:
         '200':
           description: OK
